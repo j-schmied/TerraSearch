@@ -15,21 +15,7 @@ OCR und Suche in digitalisierten Bodenuntersuchungsdokumenten
 ## Setup and Installation
 
 1. Install Dependencies (Docker, docker-compose)
-2. Create .env File containing the following values (see example below):
-    * ELASTIC_USER
-    * ELASTIC_PASSWORD
-    * GOOGLE_API_KEY
-    * KIBANA_PASSWORD
-    * STACK_VERSION
-    * LICENSE
-    * ES_PORT
-    * KIBANA_PORT
-    * FLASK_PORT
-    * SYNC_DIR
-    * MEM_LIMIT
-    * CLUSTER_NAME
-    * SYNC_DIR
-    * SYNC_DIR_LOCAL
+2. Create .env File (see example below)
 3. Create Docker Network for Project `docker network create terrasearch-net`
 4. Start Docker Compose `docker-compose up -d`
 
