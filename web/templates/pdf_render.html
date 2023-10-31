@@ -1,0 +1,7 @@
+{% extends 'template.html' %}
+
+{% block fullscreen_content %}
+
+<iframe title="PDF File" src="{{ url_for('static', filename=filename) }}" style="width: 100%; height: 100%"></iframe>
+
+{% endblock %}

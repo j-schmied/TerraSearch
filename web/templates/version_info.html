@@ -1,0 +1,24 @@
+{% extends 'template.html' %}
+
+{% block content %}
+
+<div class="container">
+
+    <h1>Software Versions</h1>
+
+    <hr>
+    <h4>TerraSearch WebApp v{{ app_version }}</h4>
+    <hr>
+
+    <h3>Third-Party Packages</h3>
+    <ul>
+        {% for package in packages %}
+        <li>
+            {{ package.name }}: {{ package.version }}
+        </li>
+        {% endfor %}
+    </ul>
+
+</div>
+
+{% endblock %}

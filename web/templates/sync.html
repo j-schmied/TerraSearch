@@ -1,0 +1,43 @@
+{% extends 'template.html' %}
+
+{% block content %}
+
+<h1>Sync</h1>
+<h6>Local Directory: {{ sync_dir }}</h6>
+<p>Place files in the sync folder mounted to the container. New Files will be converted using the OCR and NLP model and
+    then transferred to the database. Please note that synchronisation is unidirectional (Local &rarr; DB).</p>
+<p>Alternatively: <a href="/classify">classify single file</a></p>
+
+<div class="button-row">
+    <form action="/sync" method="post">
+        <input type="submit" class="btn btn-secondary" value="Start Sync">
+    </form>
+    <form action="/sync" method="get">
+        <input type="submit" class="btn btn-secondary ml-2" value="Refresh">
+    </form>
+</div>
+
+<h3 class="mt-3">New Files ({{ new_files_count }}):</h3>
+
+<details>
+    <summary>DB Files</summary>
+    <p>{{ dbhl }}</p>
+</details>
+
+<div class="files-container">
+    {% for file in files %}
+    <div class="file">
+        <div class="file-left">
+            <p><strong>{{ file.name }}</strong> (Signature: {{ file.signature }})</p>
+        </div>
+        <div class="file-right">
+            <form action="/classify" method="post">
+                <input type="text" name="file_name" value="{{ local_sync_dir }}/{{ file.name }}" class="hidden">
+                <input type="submit" value="Preview" class="btn btn-secondary">
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

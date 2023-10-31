@@ -1,0 +1,22 @@
+{% extends 'template.html' %}
+
+{% block content %}
+
+<div class="container">
+    <h1>Classification</h1>
+    <p>Here, you may upload your pdf files. Subsequently, they will be classified using the OCR and NLP model and after
+        manual verification, they can be pushed to the database for further indexing.</p>
+    <form action="" method="post" enctype="multipart/form-data">
+        <div class="form-group mt-3 mb-3">
+            <div class="custom-file">
+                <input type="file" name="file" id="file" accept="application/pdf" class="custom-file-input">
+                <label for="file">(.pdf file for classification)</label>
+            </div>
+        </div>
+        <div class="form-group mt-3 mb-3">
+            <input type="submit" name=start-classification" value="Start classification" class="btn btn-secondary">
+        </div>
+    </form>
+</div>
+
+{% endblock %}

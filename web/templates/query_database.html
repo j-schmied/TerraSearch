@@ -1,0 +1,71 @@
+{% extends 'template.html' %}
+
+{% block content %}
+    {% if results %}
+    <div class="query-results">
+    {% else %}
+    <div class="query">
+        {% endif %}
+        <div class="heading">
+            <h1 class="query-heading">TerraSearch</h1>
+        </div>
+
+
+        <form action="/query" class="search-bar" method="post">
+            <input type="text" name="input-query" placeholder="Enter search criteria..." class="input-query">
+            <input type="submit" value="Search" class="search-button">
+        </form>
+
+        {% if raw %}
+        <span>
+            Raw Response: {{ results }}
+        </span>
+        {% endif %}
+
+        {% if results and results_count %}
+        {% if query_string %}
+        <div class="query-results-header">
+            {% if results_count == 1 %}
+            <h5 class="query-results-header-title">Found {{ results_count }} match for query "{{ query_string }}"</h5>
+            {% else %}
+            <h5 class="query-results-header-title">Found {{ results_count }} matches for query "{{ query_string }}"</h5>
+            {% endif %}
+            <h5>Open Query in Map View <a href="/map"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></h5>
+        </div>
+        {% endif %}
+
+        <div class="result">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Document</th>
+                    <th scope="col">Content Preview</th>
+                    <th scope="col">Metadata</th>
+                    <th scope="col">Link</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for result in results %}
+                <tr>
+                    <td>{{ result.document }}</td>
+                    <td>{{ result.pages }}...</td>
+                    <td>Location:<br><a
+                            href="https://www.google.com/maps/place/{{ location[0] }},{{ location[1] }}/@{{ location }}">{{
+                        location[0] }}, {{ location[1] }}</a><br>Timestamp:<br>{{
+                        result.metadata.timestamp }}
+                    </td>
+                    <td>
+                        <form action="/pdf" method="post">
+                            <input type="text" name="file" value="{{ result.document }}" class="hidden">
+                            <input type="submit" value="View PDF" class="btn btn-light">
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+
+    </div>
+{% endblock %}
